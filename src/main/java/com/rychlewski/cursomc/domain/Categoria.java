@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 // equals e hashCode sao uma forma de comparar os objetos pelos seus valores
 // (strategy = GenerationType.IDENTITY) === geracao automatica dos IDs
 
@@ -25,7 +27,9 @@ public class Categoria implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	// puxei o relacionamento da class Categorias
+	// @ManyToMany(mappedBy = "categorias") == puxei o relacionamento da class Categorias
+	// @JsonManagedReference == utilizar no lado que vc quer que venha os obj
+	@JsonManagedReference
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<>();
 	
